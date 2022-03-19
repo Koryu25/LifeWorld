@@ -1,0 +1,5 @@
+name: LifeWorld
+version: '${version}'
+main: com.github.koryu25.lifeworld.LifeWorldMain
+api-version: 1.18
+authors: [ Koryu25 ]
