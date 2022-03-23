@@ -24,4 +24,12 @@ public final class MainConfig extends CustomConfig {
     public String getPassword() {
         return getConfig().getString("mysql.password", null);
     }
+
+    // Game Play
+    public String getMainWorld() {
+        return getConfig().getString("world.main", "world");
+    }
+    public int getInitialAge() {
+        return getConfig().getInt("initial.age", 13);
+    }
 }

@@ -5,3 +5,9 @@ mysql:
   database: life
   username: root
   password:
+# Game Play
+world:
+  main: world
+# initial value
+initial:
+  age: 13
