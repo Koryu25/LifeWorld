@@ -2,14 +2,12 @@ package com.github.koryu25.lifeworld.data;
 
 import com.github.koryu25.lifeworld.LifeWorldMain;
 import com.github.koryu25.lifeworld.block.LWBlock;
-import com.github.koryu25.lifeworld.data.mysql.MySQLManager;
 import com.github.koryu25.lifeworld.yaml.MainConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /* データベースに接続するためのクラス */
@@ -103,7 +101,7 @@ public class SqlDAO {
     public boolean insertBlockData(LWBlock lwBlock) {
         try {
             String s = "INSERT INTO block (x, y, z, kind) VALUES (?, ?, ?, ?)";
-            PreparedStatement ps = MySQLManager.getConnection().prepareStatement(s);
+            PreparedStatement ps = connection.prepareStatement(s);
             ps.setInt(1, lwBlock.x);
             ps.setInt(2, lwBlock.y);
             ps.setInt(3, lwBlock.z);
@@ -119,7 +117,7 @@ public class SqlDAO {
     public Set<LWBlock> getAllBlockData() {
         try {
             String s = "SELECT * FROM block";
-            PreparedStatement ps = MySQLManager.getConnection().prepareStatement(s);
+            PreparedStatement ps = connection.prepareStatement(s);
             ResultSet rs = ps.executeQuery();
             Set<LWBlock> set = new HashSet<>();
             while (rs.next()) {
@@ -142,7 +140,7 @@ public class SqlDAO {
     public boolean updateBlockData(LWBlock lwBlock) {
         try {
             String s = "UPDATE block SET kind = ?";
-            PreparedStatement ps = MySQLManager.getConnection().prepareStatement(s);
+            PreparedStatement ps =connection.prepareStatement(s);
             ps.setString(1, lwBlock.kind);
             ps.executeUpdate();
             return true;

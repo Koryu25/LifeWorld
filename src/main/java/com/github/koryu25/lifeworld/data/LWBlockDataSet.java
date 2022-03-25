@@ -1,7 +1,6 @@
 package com.github.koryu25.lifeworld.data;
 
 import com.github.koryu25.lifeworld.block.LWBlock;
-import com.github.koryu25.lifeworld.data.mysql.*;
 import org.bukkit.block.Block;
 
 import java.util.Set;
@@ -9,8 +8,10 @@ import java.util.Set;
 public class LWBlockDataSet {
 
     private static Set<LWBlock> set;
+    private SqlDAO dao;
 
     private LWBlockDataSet() {
+        dao = new SqlDAO();
     }
 
     public static LWBlock search(Block block) {
@@ -29,10 +30,12 @@ public class LWBlockDataSet {
 
     public static void onEnable() {
         // load
-        set = Select.allLWBlock();
+        SqlDAO dao = new SqlDAO();
+        set = dao.getAllBlockData();
     }
 
     public static void onDisable() {
+        SqlDAO dao = new SqlDAO();
         // lwBlock.onDisable()
         for (LWBlock lwBlock : set) {
             lwBlock.onDisable();
@@ -41,13 +44,16 @@ public class LWBlockDataSet {
         for (LWBlock lwBlock : set) {
             // 存在したらupdate
             // 存在しなかったらinsert
-            if (Exists.lwBlock(lwBlock)) Update.lwBlock(lwBlock);
-            else Insert.lwBlock(lwBlock);
+            if (dao.isExistBlockData(lwBlock)) {
+                dao.updateBlockData(lwBlock);
+            } else {
+                dao.insertBlockData(lwBlock);
+            }
         }
         // setに存在しなかったらdelete
-        for (LWBlock lwBlock : Select.allLWBlock()) {
+        for (LWBlock lwBlock : dao.getAllBlockData()) {
             if (!inSet(lwBlock)) {
-                Delete.lwBlock(lwBlock);
+                dao.deleteBlockData(lwBlock);
             }
         }
     }
