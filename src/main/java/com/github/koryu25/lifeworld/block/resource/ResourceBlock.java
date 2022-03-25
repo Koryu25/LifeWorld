@@ -2,29 +2,35 @@ package com.github.koryu25.lifeworld.block.resource;
 
 import com.github.koryu25.lifeworld.LifeWorldMain;
 import com.github.koryu25.lifeworld.block.LWBlock;
-import com.github.koryu25.lifeworld.block.resource.ore.IronOreBlock;
-import com.github.koryu25.lifeworld.data.LWBlockDataSet;
 import com.github.koryu25.lifeworld.item.LWItem;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public interface ResourceBlock {
+public abstract class ResourceBlock extends LWBlock {
 
-    default Material getOriginal() {
+    public ResourceBlock(Block block, String kind) {
+        super(block, kind);
+    }
+
+    public ResourceBlock(int x, int y, int z, String kind) {
+        super(x, y, z, kind);
+    }
+
+    protected Material getOriginal() {
         return getBlockItem().getMaterial();
     }
 
-    Material getBroken();
+    protected abstract Material getBroken();
 
-    LWItem getBlockItem();
+    protected abstract LWItem getBlockItem();
 
-    LWItem getResourceItem();
+    protected abstract LWItem getResourceItem();
 
-    int getTime();
+    protected abstract int getTime();
 
-    default boolean whenBroken(LWBlock lwBlock, Player player) {
+    protected boolean whenBroken(LWBlock lwBlock, Player player) {
         Block block = lwBlock.getBlock();
         // インターバル中だった時の処理
         if (block.getType() == getBroken()) return true;
@@ -47,17 +53,8 @@ public interface ResourceBlock {
         return true;
     }
 
-    default void onDisable(LWBlock lwBlock) {
+    protected void onDisable(LWBlock lwBlock) {
         if (getOriginal() != lwBlock.getBlock().getType()) lwBlock.setBlock(getOriginal());
     }
 
-    static ResourceBlock instance(Block block, String name) {
-        return instance(block.getX(), block.getY(), block.getZ(),name);
-    }
-    static ResourceBlock instance(int x, int y, int z, String name) {
-        return switch (name) {
-            case "IronOreBlock" -> new IronOreBlock(x, y, z);
-            default -> null;
-        };
-    }
 }

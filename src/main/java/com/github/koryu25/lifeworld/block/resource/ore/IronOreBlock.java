@@ -8,7 +8,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-public class IronOreBlock extends LWBlock implements ResourceBlock {
+public class IronOreBlock extends ResourceBlock {
 
     public IronOreBlock(Block block) {
         this(block.getX(), block.getY(), block.getZ());
@@ -19,12 +19,12 @@ public class IronOreBlock extends LWBlock implements ResourceBlock {
 
     @Override
     public boolean whenBroken(Player player) {
-        return ResourceBlock.super.whenBroken((LWBlock) this, player);
+        return whenBroken((LWBlock) this, player);
     }
 
     @Override
     public void onDisable() {
-        ResourceBlock.super.onDisable(this);
+        onDisable(this);
     }
 
     @Override
