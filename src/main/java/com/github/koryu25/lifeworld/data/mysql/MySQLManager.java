@@ -1,5 +1,7 @@
-package com.github.koryu25.lifeworld.mysql;
+package com.github.koryu25.lifeworld.data.mysql;
 
+import com.github.koryu25.lifeworld.LifeWorldMain;
+import com.github.koryu25.lifeworld.yaml.MainConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -9,6 +11,8 @@ import java.sql.SQLException;
 
 public class MySQLManager {
 
+    private static MySQLManager instance;
+
     private Connection connection;
     private final String host;
     private final int port;
@@ -16,7 +20,7 @@ public class MySQLManager {
     private final String username;
     private final String password;
 
-    public MySQLManager(JavaPlugin main, String host, int port, String database, String username, String password) {
+    private MySQLManager(JavaPlugin main, String host, int port, String database, String username, String password) {
         this.host = host;
         this.port = port;
         this.database = database;
@@ -45,7 +49,19 @@ public class MySQLManager {
             connection = DriverManager.getConnection("jdbc:mysql://"+ host +":"+ port +"/"+ database, username, password);
         }
     }
-    public Connection getConnection() {
-        return connection;
+
+    public static void construct() {
+        instance = new MySQLManager(
+                LifeWorldMain.getInstance(),
+                MainConfig.getHost(),
+                MainConfig.getPort(),
+                MainConfig.getDatabase(),
+                MainConfig.getUsername(),
+                MainConfig.getPassword()
+        );
+    }
+
+    public static Connection getConnection() {
+        return instance.connection;
     }
 }

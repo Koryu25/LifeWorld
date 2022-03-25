@@ -2,7 +2,7 @@
 mysql:
   host: localhost
   port: 3306
-  database: life
+  database: life_world
   username: root
   password:
 # Game Play

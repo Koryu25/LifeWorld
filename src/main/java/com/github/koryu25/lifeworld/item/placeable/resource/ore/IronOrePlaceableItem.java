@@ -1,16 +1,17 @@
-package com.github.koryu25.lifeworld.item.block;
+package com.github.koryu25.lifeworld.item.placeable.resource.ore;
 
 import com.github.koryu25.lifeworld.block.LWBlock;
 import com.github.koryu25.lifeworld.block.resource.ore.IronOreBlock;
 import com.github.koryu25.lifeworld.item.ItemType;
 import com.github.koryu25.lifeworld.item.LWItem;
+import com.github.koryu25.lifeworld.item.placeable.PlaceableItem;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class IronOrePlaceableBlock implements LWItem, PlaceableBlock {
+public class IronOrePlaceableItem implements LWItem, PlaceableItem {
     @Override
     public ItemType getType() {
         return ItemType.RESOURCE_BLOCK;

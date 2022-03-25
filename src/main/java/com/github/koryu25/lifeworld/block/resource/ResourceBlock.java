@@ -2,57 +2,62 @@ package com.github.koryu25.lifeworld.block.resource;
 
 import com.github.koryu25.lifeworld.LifeWorldMain;
 import com.github.koryu25.lifeworld.block.LWBlock;
+import com.github.koryu25.lifeworld.block.resource.ore.IronOreBlock;
+import com.github.koryu25.lifeworld.data.LWBlockDataSet;
 import com.github.koryu25.lifeworld.item.LWItem;
-import com.github.koryu25.lifeworld.item.LWItemManager;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class ResourceBlock extends LWBlock {
+public interface ResourceBlock {
 
-    private final Material broken;
-    private LWItem blockItem;
-    private LWItem resourceItem;
-    @Getter @Setter
-    private int interval;
-
-    public ResourceBlock(int x, int y, int z, LWItem blockItem, LWItem resourceItem, Material broken, int interval) {
-        super(x, y, z, blockItem.getMaterial());
-        this.blockItem = blockItem;
-        this.resourceItem = resourceItem;
-        this.broken = broken;
-        this.interval = interval;
+    default Material getOriginal() {
+        return getBlockItem().getMaterial();
     }
 
-    @Override
-    public boolean whenBroken(Player player) {
-        Block block = getBlock();
-        // interval中だった時の処理
-        if (block.getType() == broken) return true;
-        // handの確認
-        if (LWItemManager.RESOURCE_DISASSEMBLER.match(player.getInventory().getItemInMainHand())) {
-            block.getWorld().dropItem(getBlock().getLocation(), blockItem.toItemStack());
+    Material getBroken();
+
+    LWItem getBlockItem();
+
+    LWItem getResourceItem();
+
+    int getTime();
+
+    default boolean whenBroken(LWBlock lwBlock, Player player) {
+        Block block = lwBlock.getBlock();
+        // インターバル中だった時の処理
+        if (block.getType() == getBroken()) return true;
+        // 道具が資源ブロック分解器だった時の処理
+        if (LWItem.RESOURCE_DISASSEMBLER.match(player.getInventory().getItemInMainHand())) {
+            block.getWorld().dropItem(block.getLocation(), getBlockItem().toItemStack());
+            lwBlock.remove();
             return false;
         }
         // ブロックの変更
-        setBlock(broken);
+        lwBlock.setBlock(getBroken());
         new BukkitRunnable() {
             @Override
             public void run() {
-                setBlock(material);
+                lwBlock.setBlock(getOriginal());
             }
-        }.runTaskLater(LifeWorldMain.getInstance(), interval);
+        }.runTaskLater(LifeWorldMain.getInstance(), getTime());
         // アイテムのドロップ
-        block.getWorld().dropItem(block.getLocation(), resourceItem.toItemStack());
+        lwBlock.dropItem(getResourceItem().toItemStack());
         return true;
     }
 
-    @Override
-    public void onDisable() {
-        if (material != getBlock().getType()) setBlock(material);
+    default void onDisable(LWBlock lwBlock) {
+        if (getOriginal() != lwBlock.getBlock().getType()) lwBlock.setBlock(getOriginal());
+    }
+
+    static ResourceBlock instance(Block block, String name) {
+        return instance(block.getX(), block.getY(), block.getZ(),name);
+    }
+    static ResourceBlock instance(int x, int y, int z, String name) {
+        return switch (name) {
+            case "IronOreBlock" -> new IronOreBlock(x, y, z);
+            default -> null;
+        };
     }
 }

@@ -1,6 +1,9 @@
 package com.github.koryu25.lifeworld.block;
 
 import com.github.koryu25.lifeworld.LifeWorldMain;
+import com.github.koryu25.lifeworld.block.resource.ore.IronOreBlock;
+import com.github.koryu25.lifeworld.data.LWBlockDataSet;
+import com.github.koryu25.lifeworld.yaml.MainConfig;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -13,17 +16,24 @@ public abstract class LWBlock {
     public final int x;
     public final int y;
     public final int z;
-    protected Material material;
+    public final String kind;
 
-    public LWBlock(int x, int y, int z, Material material) {
+    public LWBlock(Block block, String kind) {
+        this(block.getX(), block.getY(), block.getZ(), kind);
+    }
+    public LWBlock(int x, int y, int z, String kind) {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.material = material;
+        this.kind = kind;
+    }
+
+    public void dropItem(ItemStack itemStack) {
+        getBlock().getWorld().dropItem(getBlock().getLocation(), itemStack);
     }
 
     public Block getBlock() {
-        return Bukkit.getWorld(LifeWorldMain.getMainConfig().getMainWorld()).getBlockAt(x, y, z);
+        return Bukkit.getWorld(MainConfig.getMainWorld()).getBlockAt(x, y, z);
     }
     public void setBlock(Material material) {
         getBlock().setType(material);
@@ -33,9 +43,25 @@ public abstract class LWBlock {
         return this.x == block.getX() && this.y == block.getY() && this.z == block.getZ();
     }
 
+    public void add() {
+        LWBlockDataSet.add(this);
+    }
+    public void remove() {
+        LWBlockDataSet.remove(this);
+    }
+
     // 壊されたときの処理
     public abstract boolean whenBroken(Player player);
 
     // プラグインが終了するときの処理
     public abstract void onDisable();
+
+    public static LWBlock of(String name, int x, int y, int z) {
+        switch (name) {
+            case "IRON_ORE_BLOCK":
+                return new IronOreBlock(x, y, z);
+            default:
+                return null;
+        }
+    }
 }

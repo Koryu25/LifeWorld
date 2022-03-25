@@ -1,5 +1,8 @@
 package com.github.koryu25.lifeworld.item;
 
+import com.github.koryu25.lifeworld.item.placeable.resource.ore.IronOrePlaceableItem;
+import com.github.koryu25.lifeworld.item.resource.ore.IronOre;
+import com.github.koryu25.lifeworld.item.tool.ResourceDisassembler;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -56,5 +59,31 @@ public interface LWItem {
             if (!lore.get(i).equals(itemMeta.getLore().get(i))) return false;
         }
         return true;
+    }
+
+    // static
+    // Resource
+    // Block
+    IronOrePlaceableItem IRON_ORE_RESOURCE_BLOCK = new IronOrePlaceableItem();
+    // Ore
+    IronOre IRON_ORE = new IronOre();
+    // Tool
+    ResourceDisassembler RESOURCE_DISASSEMBLER = new ResourceDisassembler();
+
+    static LWItem getResourceItem(ItemStack itemStack) {
+        if (IRON_ORE_RESOURCE_BLOCK.match(itemStack)) return IRON_ORE_RESOURCE_BLOCK;
+        return null;
+    }
+
+    static LWItem of(String name) {
+        switch (name) {
+            case "IRON_ORE_RESOURCE_BLOCK":
+                return IRON_ORE_RESOURCE_BLOCK;
+            case "IRON_ORE":
+                return IRON_ORE;
+            case "RESOURCE_DISASSEMBLER":
+                return RESOURCE_DISASSEMBLER;
+        }
+        return null;
     }
 }
