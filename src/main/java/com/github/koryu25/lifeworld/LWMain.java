@@ -1,47 +1,47 @@
 package com.github.koryu25.lifeworld;
 
-import com.github.koryu25.lifeworld.block.LWBlock;
 import com.github.koryu25.lifeworld.command.CommandManager;
 import com.github.koryu25.lifeworld.data.LWBlockDataSet;
+import com.github.koryu25.lifeworld.data.SqlDAO;
 import com.github.koryu25.lifeworld.listener.ListenerManager;
-import com.github.koryu25.lifeworld.data.mysql.MySQLManager;
-import com.github.koryu25.lifeworld.player.LWPlayer;
 import com.github.koryu25.lifeworld.yaml.MainConfig;
+import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.List;
+public final class LWMain extends JavaPlugin {
 
-public final class LifeWorldMain extends JavaPlugin {
+    private static LWMain instance;
 
-    private static JavaPlugin instance;
-
-    // Data
-    private static List<LWPlayer> lwPlayerList;
+    @Getter
+    private MainConfig mainConfig;
+    @Getter
+    private SqlDAO sqlDAO;
+    @Getter
+    private LWBlockDataSet lwBlockDataSet;
 
     @Override
     public void onEnable() {
         // instance
         instance = this;
         // yaml
-        MainConfig.construct();
+        mainConfig = new MainConfig();
         // mysql
-        MySQLManager.construct();
+        sqlDAO = new SqlDAO();
         // command
         new CommandManager(this);
+        // event listener
         new ListenerManager(this);
         // data
-        lwPlayerList = new ArrayList<>();
-        LWBlockDataSet.onEnable();
+        lwBlockDataSet = new LWBlockDataSet();
     }
 
     @Override
     public void onDisable() {
         // LWBlock
-        LWBlockDataSet.onDisable();
+        lwBlockDataSet.onDisable();
     }
 
-    public static JavaPlugin getInstance() {
+    public static LWMain getInstance() {
         return instance;
     }
 }
