@@ -1,5 +1,6 @@
 package com.github.koryu25.lifeworld.data;
 
+import com.github.koryu25.lifeworld.LifeWorldMain;
 import com.github.koryu25.lifeworld.block.LWBlock;
 import org.bukkit.block.Block;
 
@@ -8,10 +9,8 @@ import java.util.Set;
 public class LWBlockDataSet {
 
     private static Set<LWBlock> set;
-    private SqlDAO dao;
 
     private LWBlockDataSet() {
-        dao = new SqlDAO();
     }
 
     public static LWBlock search(Block block) {
@@ -30,12 +29,12 @@ public class LWBlockDataSet {
 
     public static void onEnable() {
         // load
-        SqlDAO dao = new SqlDAO();
+        SqlDAO dao = LifeWorldMain.getInstance().getDao();
         set = dao.getAllBlockData();
     }
 
     public static void onDisable() {
-        SqlDAO dao = new SqlDAO();
+        SqlDAO dao = LifeWorldMain.getInstance().getDao();
         // lwBlock.onDisable()
         for (LWBlock lwBlock : set) {
             lwBlock.onDisable();

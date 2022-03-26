@@ -33,7 +33,7 @@ public abstract class LWBlock {
     }
 
     public Block getBlock() {
-        return Bukkit.getWorld(MainConfig.getMainWorld()).getBlockAt(x, y, z);
+        return Bukkit.getWorld(LifeWorldMain.getInstance().getMainConfig().getMainWorld()).getBlockAt(x, y, z);
     }
     public void setBlock(Material material) {
         getBlock().setType(material);

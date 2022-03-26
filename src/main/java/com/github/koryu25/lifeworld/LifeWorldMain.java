@@ -2,9 +2,12 @@ package com.github.koryu25.lifeworld;
 
 import com.github.koryu25.lifeworld.command.CommandManager;
 import com.github.koryu25.lifeworld.data.LWBlockDataSet;
+import com.github.koryu25.lifeworld.data.SqlDAO;
 import com.github.koryu25.lifeworld.listener.ListenerManager;
 import com.github.koryu25.lifeworld.player.LWPlayer;
 import com.github.koryu25.lifeworld.yaml.MainConfig;
+import com.sun.tools.javac.Main;
+import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -12,7 +15,14 @@ import java.util.List;
 
 public final class LifeWorldMain extends JavaPlugin {
 
-    private static JavaPlugin instance;
+    private static LifeWorldMain instance;
+
+    //sql
+    @Getter
+    private SqlDAO dao;
+    //config
+    @Getter
+    private MainConfig mainConfig;
 
     // Data
     private static List<LWPlayer> lwPlayerList;
@@ -21,8 +31,10 @@ public final class LifeWorldMain extends JavaPlugin {
     public void onEnable() {
         // instance
         instance = this;
+        //sql
+        dao = new SqlDAO();
         // yaml
-        MainConfig.construct();
+        mainConfig = new MainConfig();
         // command
         new CommandManager(this);
         new ListenerManager(this);
@@ -37,7 +49,7 @@ public final class LifeWorldMain extends JavaPlugin {
         LWBlockDataSet.onDisable();
     }
 
-    public static JavaPlugin getInstance() {
+    public static LifeWorldMain getInstance() {
         return instance;
     }
 }

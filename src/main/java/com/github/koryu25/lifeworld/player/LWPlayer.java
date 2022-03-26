@@ -33,7 +33,7 @@ public class LWPlayer {
     private int lucky;
 
     public LWPlayer(Player player) {
-        this(player, MainConfig.getInitialAge());
+        this(player, LifeWorldMain.getInstance().getMainConfig().getInitialAge());
     }
     public LWPlayer(Player player, int age) {
         this.player = player;

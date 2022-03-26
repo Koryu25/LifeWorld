@@ -35,11 +35,11 @@ public class SqlDAO {
 
     public SqlDAO() {
         this(LifeWorldMain.getInstance(),
-                MainConfig.getHost(),
-                MainConfig.getPort(),
-                MainConfig.getDatabase(),
-                MainConfig.getUsername(),
-                MainConfig.getPassword());
+                LifeWorldMain.getInstance().getMainConfig().getHost(),
+                LifeWorldMain.getInstance().getMainConfig().getPort(),
+                LifeWorldMain.getInstance().getMainConfig().getDatabase(),
+                LifeWorldMain.getInstance().getMainConfig().getUsername(),
+                LifeWorldMain.getInstance().getMainConfig().getPassword());
     }
 
     private boolean connectionTest() {
