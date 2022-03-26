@@ -1,5 +1,6 @@
 package com.github.koryu25.lifeworld.listener.listeners;
 
+import com.github.koryu25.lifeworld.LifeWorldMain;
 import com.github.koryu25.lifeworld.block.LWBlock;
 import com.github.koryu25.lifeworld.data.LWBlockDataSet;
 import com.github.koryu25.lifeworld.item.LWItem;
@@ -16,7 +17,7 @@ public class BlockBreakPlaceListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         // lwBrockが存在するか
-        LWBlock lwBlock = LWBlockDataSet.search(event.getBlock());
+        LWBlock lwBlock = LifeWorldMain.getInstance().getLwBlockDataSet().search(event.getBlock());
         if (lwBlock != null) {
             // 壊れたときの処理
             event.setCancelled(lwBlock.whenBroken(event.getPlayer()));

@@ -25,7 +25,10 @@ public final class LifeWorldMain extends JavaPlugin {
     private MainConfig mainConfig;
 
     // Data
-    private static List<LWPlayer> lwPlayerList;
+    @Getter
+    private List<LWPlayer> lwPlayerList;
+    @Getter
+    private LWBlockDataSet lwBlockDataSet;
 
     @Override
     public void onEnable() {
@@ -40,13 +43,11 @@ public final class LifeWorldMain extends JavaPlugin {
         new ListenerManager(this);
         // data
         lwPlayerList = new ArrayList<>();
-        LWBlockDataSet.onEnable();
+        lwBlockDataSet = new LWBlockDataSet();
     }
 
     @Override
     public void onDisable() {
-        // LWBlock
-        LWBlockDataSet.onDisable();
     }
 
     public static LifeWorldMain getInstance() {

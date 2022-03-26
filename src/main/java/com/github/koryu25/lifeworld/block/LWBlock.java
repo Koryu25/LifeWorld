@@ -44,17 +44,14 @@ public abstract class LWBlock {
     }
 
     public void add() {
-        LWBlockDataSet.add(this);
+        LifeWorldMain.getInstance().getLwBlockDataSet().add(this);
     }
     public void remove() {
-        LWBlockDataSet.remove(this);
+        LifeWorldMain.getInstance().getLwBlockDataSet().remove(this);
     }
 
     // 壊されたときの処理
     public abstract boolean whenBroken(Player player);
-
-    // プラグインが終了するときの処理
-    public abstract void onDisable();
 
     public static LWBlock of(String name, int x, int y, int z) {
         switch (name) {

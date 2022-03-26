@@ -8,58 +8,31 @@ import java.util.Set;
 
 public class LWBlockDataSet {
 
-    private static Set<LWBlock> set;
+    private Set<LWBlock> blockDataSet;
 
-    private LWBlockDataSet() {
+    public LWBlockDataSet() {
+        // load
+        SqlDAO dao = LifeWorldMain.getInstance().getDao();
+        blockDataSet = dao.getAllBlockData();
     }
 
-    public static LWBlock search(Block block) {
-        for (LWBlock lwBlock : set) {
+    public LWBlock search(Block block) {
+        for (LWBlock lwBlock : blockDataSet) {
             if (lwBlock.match(block)) return lwBlock;
         }
         return null;
     }
 
-    public static void add(LWBlock lwBlock) {
-        set.add(lwBlock);
+    public void add(LWBlock lwBlock) {
+        blockDataSet.add(lwBlock);
     }
-    public static void remove(LWBlock lwBlock) {
-        set.remove(lwBlock);
-    }
-
-    public static void onEnable() {
-        // load
-        SqlDAO dao = LifeWorldMain.getInstance().getDao();
-        set = dao.getAllBlockData();
-    }
-
-    public static void onDisable() {
-        SqlDAO dao = LifeWorldMain.getInstance().getDao();
-        // lwBlock.onDisable()
-        for (LWBlock lwBlock : set) {
-            lwBlock.onDisable();
-        }
-        // save
-        for (LWBlock lwBlock : set) {
-            // 存在したらupdate
-            // 存在しなかったらinsert
-            if (dao.isExistBlockData(lwBlock)) {
-                dao.updateBlockData(lwBlock);
-            } else {
-                dao.insertBlockData(lwBlock);
-            }
-        }
-        // setに存在しなかったらdelete
-        for (LWBlock lwBlock : dao.getAllBlockData()) {
-            if (!inSet(lwBlock)) {
-                dao.deleteBlockData(lwBlock);
-            }
-        }
+    public void remove(LWBlock lwBlock) {
+        blockDataSet.remove(lwBlock);
     }
 
     // setの中に存在するか
-    private static boolean inSet(LWBlock lwBlock) {
-        for (LWBlock element : set) {
+    private boolean inSet(LWBlock lwBlock) {
+        for (LWBlock element : blockDataSet) {
             if (lwBlock.match(element.getBlock())) return true;
         }
         return false;

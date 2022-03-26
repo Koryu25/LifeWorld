@@ -23,11 +23,6 @@ public class IronOreBlock extends ResourceBlock {
     }
 
     @Override
-    public void onDisable() {
-        onDisable(this);
-    }
-
-    @Override
     public Material getBroken() {
         return Material.COBBLESTONE;
     }
