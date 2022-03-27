@@ -50,9 +50,6 @@ public abstract class LWBlock {
     // 壊されたときの処理
     public abstract boolean whenBroken(Player player);
 
-    // プラグインが終了するときの処理
-    public abstract void onDisable();
-
     public static LWBlock of(String name, int x, int y, int z) {
         switch (name) {
             case IronOreBlock.KIND:

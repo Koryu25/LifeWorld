@@ -2,7 +2,6 @@ package com.github.koryu25.lifeworld.listener.listeners;
 
 import com.github.koryu25.lifeworld.LWMain;
 import com.github.koryu25.lifeworld.block.LWBlock;
-import com.github.koryu25.lifeworld.data.LWBlockDataSet;
 import com.github.koryu25.lifeworld.item.LWItem;
 import com.github.koryu25.lifeworld.item.placeable.PlaceableItem;
 import org.bukkit.event.EventHandler;

@@ -1,7 +1,6 @@
 package com.github.koryu25.lifeworld.player;
 
 import com.github.koryu25.lifeworld.LWMain;
-import com.github.koryu25.lifeworld.yaml.MainConfig;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
