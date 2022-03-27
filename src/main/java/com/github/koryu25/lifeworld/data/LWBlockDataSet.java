@@ -1,6 +1,6 @@
 package com.github.koryu25.lifeworld.data;
 
-import com.github.koryu25.lifeworld.LifeWorldMain;
+import com.github.koryu25.lifeworld.LWMain;
 import com.github.koryu25.lifeworld.block.LWBlock;
 import org.bukkit.block.Block;
 
@@ -12,7 +12,7 @@ public class LWBlockDataSet {
 
     public LWBlockDataSet() {
         // load
-        SqlDAO dao = LifeWorldMain.getInstance().getDao();
+        SqlDAO dao = LWMain.getInstance().getDao();
         blockDataSet = dao.getAllBlockData();
     }
 

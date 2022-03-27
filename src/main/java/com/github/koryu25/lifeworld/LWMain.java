@@ -6,16 +6,15 @@ import com.github.koryu25.lifeworld.data.SqlDAO;
 import com.github.koryu25.lifeworld.listener.ListenerManager;
 import com.github.koryu25.lifeworld.player.LWPlayer;
 import com.github.koryu25.lifeworld.yaml.MainConfig;
-import com.sun.tools.javac.Main;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class LifeWorldMain extends JavaPlugin {
+public final class LWMain extends JavaPlugin {
 
-    private static LifeWorldMain instance;
+    private static LWMain instance;
 
     //sql
     @Getter
@@ -50,7 +49,7 @@ public final class LifeWorldMain extends JavaPlugin {
     public void onDisable() {
     }
 
-    public static LifeWorldMain getInstance() {
+    public static LWMain getInstance() {
         return instance;
     }
 }

@@ -1,6 +1,6 @@
 package com.github.koryu25.lifeworld.block.resource;
 
-import com.github.koryu25.lifeworld.LifeWorldMain;
+import com.github.koryu25.lifeworld.LWMain;
 import com.github.koryu25.lifeworld.block.LWBlock;
 import com.github.koryu25.lifeworld.item.LWItem;
 import org.bukkit.Material;
@@ -47,7 +47,7 @@ public abstract class ResourceBlock extends LWBlock {
             public void run() {
                 lwBlock.setBlock(getOriginal());
             }
-        }.runTaskLater(LifeWorldMain.getInstance(), getTime());
+        }.runTaskLater(LWMain.getInstance(), getTime());
         // アイテムのドロップ
         lwBlock.dropItem(getResourceItem().toItemStack());
         return true;

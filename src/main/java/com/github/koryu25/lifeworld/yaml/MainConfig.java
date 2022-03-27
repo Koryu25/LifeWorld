@@ -1,12 +1,11 @@
 package com.github.koryu25.lifeworld.yaml;
 
-import com.github.koryu25.lifeworld.LifeWorldMain;
-import org.bukkit.plugin.java.JavaPlugin;
+import com.github.koryu25.lifeworld.LWMain;
 
 public final class MainConfig extends CustomConfig {
 
     public MainConfig() {
-        super(LifeWorldMain.getInstance(), "config.yml");
+        super(LWMain.getInstance(), "config.yml");
     }
 
     // MySQL

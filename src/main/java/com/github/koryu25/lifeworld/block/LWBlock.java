@@ -1,10 +1,7 @@
 package com.github.koryu25.lifeworld.block;
 
-import com.github.koryu25.lifeworld.LifeWorldMain;
+import com.github.koryu25.lifeworld.LWMain;
 import com.github.koryu25.lifeworld.block.resource.ore.IronOreBlock;
-import com.github.koryu25.lifeworld.data.LWBlockDataSet;
-import com.github.koryu25.lifeworld.yaml.MainConfig;
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -33,7 +30,7 @@ public abstract class LWBlock {
     }
 
     public Block getBlock() {
-        return Bukkit.getWorld(LifeWorldMain.getInstance().getMainConfig().getMainWorld()).getBlockAt(x, y, z);
+        return Bukkit.getWorld(LWMain.getInstance().getMainConfig().getMainWorld()).getBlockAt(x, y, z);
     }
     public void setBlock(Material material) {
         getBlock().setType(material);
@@ -44,10 +41,10 @@ public abstract class LWBlock {
     }
 
     public void add() {
-        LifeWorldMain.getInstance().getLwBlockDataSet().add(this);
+        LWMain.getInstance().getLwBlockDataSet().add(this);
     }
     public void remove() {
-        LifeWorldMain.getInstance().getLwBlockDataSet().remove(this);
+        LWMain.getInstance().getLwBlockDataSet().remove(this);
     }
 
     // 壊されたときの処理

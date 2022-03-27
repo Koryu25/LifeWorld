@@ -1,7 +1,6 @@
 package com.github.koryu25.lifeworld.player;
 
-import com.github.koryu25.lifeworld.LifeWorldMain;
-import com.github.koryu25.lifeworld.yaml.MainConfig;
+import com.github.koryu25.lifeworld.LWMain;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
@@ -33,7 +32,7 @@ public class LWPlayer {
     private int lucky;
 
     public LWPlayer(Player player) {
-        this(player, LifeWorldMain.getInstance().getMainConfig().getInitialAge());
+        this(player, LWMain.getInstance().getMainConfig().getInitialAge());
     }
     public LWPlayer(Player player, int age) {
         this.player = player;

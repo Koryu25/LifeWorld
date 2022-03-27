@@ -1,8 +1,7 @@
 package com.github.koryu25.lifeworld.data;
 
-import com.github.koryu25.lifeworld.LifeWorldMain;
+import com.github.koryu25.lifeworld.LWMain;
 import com.github.koryu25.lifeworld.block.LWBlock;
-import com.github.koryu25.lifeworld.yaml.MainConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,12 +33,12 @@ public class SqlDAO {
     }
 
     public SqlDAO() {
-        this(LifeWorldMain.getInstance(),
-                LifeWorldMain.getInstance().getMainConfig().getHost(),
-                LifeWorldMain.getInstance().getMainConfig().getPort(),
-                LifeWorldMain.getInstance().getMainConfig().getDatabase(),
-                LifeWorldMain.getInstance().getMainConfig().getUsername(),
-                LifeWorldMain.getInstance().getMainConfig().getPassword());
+        this(LWMain.getInstance(),
+                LWMain.getInstance().getMainConfig().getHost(),
+                LWMain.getInstance().getMainConfig().getPort(),
+                LWMain.getInstance().getMainConfig().getDatabase(),
+                LWMain.getInstance().getMainConfig().getUsername(),
+                LWMain.getInstance().getMainConfig().getPassword());
     }
 
     private boolean connectionTest() {
