@@ -53,7 +53,4 @@ public abstract class ResourceBlock extends LWBlock {
         return true;
     }
 
-    protected void onDisable(LWBlock lwBlock) {
-        if (getOriginal() != lwBlock.getBlock().getType()) lwBlock.setBlock(getOriginal());
-    }
 }

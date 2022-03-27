@@ -8,53 +8,31 @@ import java.util.Set;
 
 public class LWBlockDataSet {
 
-    private Set<LWBlock> set;
+    private Set<LWBlock> blockDataSet;
 
     public LWBlockDataSet() {
-        set = LWMain.getInstance().getSqlDAO().getAllBlockData();
+        // load
+        SqlDAO dao = LWMain.getInstance().getDao();
+        blockDataSet = dao.getAllBlockData();
     }
 
     public LWBlock search(Block block) {
-        for (LWBlock lwBlock : set) {
+        for (LWBlock lwBlock : blockDataSet) {
             if (lwBlock.match(block)) return lwBlock;
         }
         return null;
     }
 
     public void add(LWBlock lwBlock) {
-        set.add(lwBlock);
+        blockDataSet.add(lwBlock);
     }
     public void remove(LWBlock lwBlock) {
-        set.remove(lwBlock);
-    }
-
-
-    public void onDisable() {
-        // lwBlock.onDisable()
-        for (LWBlock lwBlock : set) {
-            lwBlock.onDisable();
-        }
-        // save
-        for (LWBlock lwBlock : set) {
-            // 存在したらupdate
-            // 存在しなかったらinsert
-            if (LWMain.getInstance().getSqlDAO().isExistBlockData(lwBlock)) {
-                LWMain.getInstance().getSqlDAO().updateBlockData(lwBlock);
-            } else {
-                LWMain.getInstance().getSqlDAO().insertBlockData(lwBlock);
-            }
-        }
-        // setに存在しなかったらdelete
-        for (LWBlock lwBlock : LWMain.getInstance().getSqlDAO().getAllBlockData()) {
-            if (!inSet(lwBlock)) {
-                LWMain.getInstance().getSqlDAO().deleteBlockData(lwBlock);
-            }
-        }
+        blockDataSet.remove(lwBlock);
     }
 
     // setの中に存在するか
     private boolean inSet(LWBlock lwBlock) {
-        for (LWBlock element : set) {
+        for (LWBlock element : blockDataSet) {
             if (lwBlock.match(element.getBlock())) return true;
         }
         return false;

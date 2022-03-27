@@ -3,11 +3,13 @@ package com.github.koryu25.lifeworld.data;
 import com.github.koryu25.lifeworld.LWMain;
 import com.github.koryu25.lifeworld.block.LWBlock;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/* データベースに接続するためのクラス */
 public class SqlDAO {
 
     private Connection connection;
@@ -17,17 +19,7 @@ public class SqlDAO {
     private final String username;
     private final String password;
 
-    public SqlDAO() {
-        this(
-                LWMain.getInstance(),
-                LWMain.getInstance().getMainConfig().getHost(),
-                LWMain.getInstance().getMainConfig().getPort(),
-                LWMain.getInstance().getMainConfig().getDatabase(),
-                LWMain.getInstance().getMainConfig().getUsername(),
-                LWMain.getInstance().getMainConfig().getPassword()
-        );
-    }
-    public SqlDAO(LWMain main, String host, int port, String database, String username, String password) {
+    public SqlDAO(JavaPlugin main, String host, int port, String database, String username, String password) {
         this.host = host;
         this.port = port;
         this.database = database;
@@ -38,6 +30,15 @@ public class SqlDAO {
             main.getLogger().severe("§cデータベースへの接続テストに失敗しました。サーバーを停止します。");
             Bukkit.shutdown();
         }
+    }
+
+    public SqlDAO() {
+        this(LWMain.getInstance(),
+                LWMain.getInstance().getMainConfig().getHost(),
+                LWMain.getInstance().getMainConfig().getPort(),
+                LWMain.getInstance().getMainConfig().getDatabase(),
+                LWMain.getInstance().getMainConfig().getUsername(),
+                LWMain.getInstance().getMainConfig().getPassword());
     }
 
     private boolean connectionTest() {
@@ -138,7 +139,7 @@ public class SqlDAO {
     public boolean updateBlockData(LWBlock lwBlock) {
         try {
             String s = "UPDATE block SET kind = ?";
-            PreparedStatement ps = connection.prepareStatement(s);
+            PreparedStatement ps =connection.prepareStatement(s);
             ps.setString(1, lwBlock.kind);
             ps.executeUpdate();
             return true;
