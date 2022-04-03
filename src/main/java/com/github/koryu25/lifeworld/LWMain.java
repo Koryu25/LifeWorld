@@ -16,33 +16,10 @@ public final class LWMain extends JavaPlugin {
 
     private static LWMain instance;
 
-    //sql
-    @Getter
-    private SqlDAO dao;
-    //config
-    @Getter
-    private MainConfig mainConfig;
-
-    // Data
-    @Getter
-    private List<LWPlayer> lwPlayerList;
-    @Getter
-    private LWBlockDataSet lwBlockDataSet;
-
     @Override
     public void onEnable() {
         // instance
         instance = this;
-        //sql
-        dao = new SqlDAO();
-        // yaml
-        mainConfig = new MainConfig();
-        // command
-        new CommandManager(this);
-        new ListenerManager(this);
-        // data
-        lwPlayerList = new ArrayList<>();
-        lwBlockDataSet = new LWBlockDataSet();
     }
 
     @Override
