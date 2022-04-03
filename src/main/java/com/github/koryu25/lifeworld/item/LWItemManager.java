@@ -29,4 +29,17 @@ public class LWItemManager {
         }
         return item;
     }
+
+    public boolean contains(int customModelData) {
+        boolean result = false;
+
+        for(LWItem item : items) {
+            if(item.CustomModelData() == customModelData) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
 }
