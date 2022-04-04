@@ -23,21 +23,26 @@ public class LWBlockListener implements Listener {
         Location loc = block.getLocation();
 
         if (block.getType() == Material.SPAWNER) {
-            if (LWMain.placedCustomBlock.containsKey(loc)) {
-                LWItem lwItem = LWMain.placedCustomBlock.get(loc);
 
-                for (Entity entity : loc.getWorld().getNearbyEntities(loc, 2, 2, 2)) {
-                    if (entity.getType() == EntityType.ITEM_FRAME) {
-                        if (entity.getCustomName().equals(lwItem.name())) {
+            for (Entity entity : loc.getWorld().getNearbyEntities(loc, 2, 2, 2)) {
+                if (entity.getType() == EntityType.ITEM_FRAME) {
+                    LWItemManager lim = LWMain.getInstance().getLwItemManager();
+
+                    for(String name : lim.getCustomItemNames()) {
+                        if (entity.getCustomName().equals(name)) {
                             entity.remove();
+
+                            LWItem lwItem = lim.getItemFromName(name);
+                            player.getInventory().addItem(lim.create(lwItem.dropItem()));
                         }
                     }
+
                 }
-
-                LWItemManager lim = LWMain.getInstance().getLwItemManager();
-                player.getInventory().addItem(lim.create(lwItem.dropItem()));
-
             }
+
+
+
+
         }
     }
 }

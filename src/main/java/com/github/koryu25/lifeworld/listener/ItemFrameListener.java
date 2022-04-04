@@ -68,10 +68,6 @@ public class ItemFrameListener implements Listener {
                         spawner.setSpawnCount(0);
                         spawner.setSpawnRange(0);
 
-                        LWItemManager lim = LWMain.getInstance().getLwItemManager();
-                        LWItem lwItem = lim.getItemFromName(CustomName);
-
-                        LWMain.placedCustomBlock.put(blockLoc, lwItem);
                     }
                 }
             }

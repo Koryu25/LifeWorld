@@ -43,6 +43,14 @@ public class LWItemManager {
         return result;
     }
 
+    public List<String> getCustomItemNames() {
+        List<String> strs = new ArrayList<>();
+        for(LWItem lwItem : items) {
+            strs.add(lwItem.name());
+        }
+
+        return strs;
+    }
     public LWItem getItemFromName(String name) {
         LWItem item = null;
 

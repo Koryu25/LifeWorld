@@ -15,8 +15,6 @@ public final class LWMain extends JavaPlugin {
 
     private static LWMain instance;
 
-    public static final HashMap<Location, LWItem> placedCustomBlock = new HashMap<Location, LWItem>();
-
     @Getter
     public LWItemManager lwItemManager;
 
