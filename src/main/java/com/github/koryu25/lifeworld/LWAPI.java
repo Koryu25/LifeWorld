@@ -3,6 +3,7 @@ package com.github.koryu25.lifeworld;
 import com.github.koryu25.lifeworld.item.LWItemManager;
 import com.github.koryu25.lifeworld.util.InventoryUtil;
 
+//独自機能を呼び出すAPI
 public enum LWAPI {
 
     INSTANCE;

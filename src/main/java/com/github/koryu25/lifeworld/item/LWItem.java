@@ -18,6 +18,6 @@ public interface LWItem {
     //設置できるか
     boolean canPlace();
 
-    //XPを取得できるか
+    //取得できるEXP量
     int exp();
 }

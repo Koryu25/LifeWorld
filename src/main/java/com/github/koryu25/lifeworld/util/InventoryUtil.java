@@ -4,6 +4,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+//インベントリ操作に便利なメソッドをまとめたクラス
 public class InventoryUtil {
 
     private Inventory inv;
