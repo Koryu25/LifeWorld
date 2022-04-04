@@ -41,6 +41,10 @@ public class ItemFrameListener implements Listener {
 
                     if (contains) {
                         e.setCancelled(true);
+
+                        LWItem lwItem = LWMain.getInstance().getLwItemManager().getItemFromName(CustomName);
+                        if(!lwItem.canPlace()) return;
+
                         inv.remove(item);
 
                         //スポナーの設置

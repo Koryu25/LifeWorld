@@ -27,5 +27,10 @@ public class TestOreItem implements LWItem {
         return this;
     }
 
+    @Override
+    public boolean canPlace() {
+        return true;
+    }
+
 
 }

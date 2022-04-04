@@ -8,4 +8,7 @@ public interface LWItem {
     List<String> lore();
 
     LWItem dropItem();
+
+    //設置できるか
+    boolean canPlace();
 }
