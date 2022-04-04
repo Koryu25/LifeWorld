@@ -1,6 +1,8 @@
 package com.github.koryu25.lifeworld.listener;
 
 import com.github.koryu25.lifeworld.LWMain;
+import com.github.koryu25.lifeworld.item.LWItem;
+import com.github.koryu25.lifeworld.item.LWItemManager;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -33,7 +35,7 @@ public class ItemFrameListener implements Listener {
                 if (item.hasItemMeta()) {
                     ItemMeta meta = item.getItemMeta();
                     int customModelData = meta.getCustomModelData();
-                    System.out.println("Custom Model Data: " + customModelData);
+                    String CustomName = meta.getDisplayName();
 
                     boolean contains = LWMain.getInstance().getLwItemManager().contains(customModelData);
 
@@ -50,21 +52,26 @@ public class ItemFrameListener implements Listener {
                         itemFrame.setVisible(false);
                         itemFrame.setInvulnerable(true);
                         itemFrame.setSilent(true);
+                        itemFrame.setCustomName(CustomName);
 
                         ItemStack frame = new ItemStack(Material.ITEM_FRAME);
                         ItemMeta frameMeta = frame.getItemMeta();
                         frameMeta.setCustomModelData(customModelData);
                         frame.setItemMeta(frameMeta);
-
                         itemFrame.setItem(frame);
 
                         blockLoc.getBlock().setType(Material.SPAWNER);
                         CreatureSpawner spawner = (CreatureSpawner) blockLoc.getBlock().getState();
-                        spawner.setSpawnedType(EntityType.ITEM_FRAME);
+                        spawner.setSpawnedType(EntityType.AREA_EFFECT_CLOUD);
                         spawner.setDelay(0);
                         spawner.setMinSpawnDelay(0);
                         spawner.setSpawnCount(0);
                         spawner.setSpawnRange(0);
+
+                        LWItemManager lim = LWMain.getInstance().getLwItemManager();
+                        LWItem lwItem = lim.getItemFromName(CustomName);
+
+                        LWMain.placedCustomBlock.put(blockLoc, lwItem);
                     }
                 }
             }

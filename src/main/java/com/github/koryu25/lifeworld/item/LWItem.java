@@ -6,4 +6,6 @@ public interface LWItem {
     String name();
     int CustomModelData();
     List<String> lore();
+
+    LWItem dropItem();
 }

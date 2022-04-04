@@ -22,5 +22,10 @@ public class TestOreItem implements LWItem {
                 "アイテムです");
     }
 
+    @Override
+    public LWItem dropItem() {
+        return this;
+    }
+
 
 }

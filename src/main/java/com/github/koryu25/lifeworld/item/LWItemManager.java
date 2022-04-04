@@ -42,4 +42,16 @@ public class LWItemManager {
 
         return result;
     }
+
+    public LWItem getItemFromName(String name) {
+        LWItem item = null;
+
+        for(LWItem lwItem : items) {
+            if(lwItem.name().equals(name)) {
+                item = lwItem;
+            }
+        }
+
+        return item;
+    }
 }
