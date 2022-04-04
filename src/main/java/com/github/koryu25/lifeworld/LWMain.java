@@ -1,5 +1,6 @@
 package com.github.koryu25.lifeworld;
 
+import com.github.koryu25.lifeworld.command.CommandManager;
 import com.github.koryu25.lifeworld.item.LWItemManager;
 import com.github.koryu25.lifeworld.listener.ListenerManager;
 import lombok.Getter;
@@ -23,6 +24,9 @@ public final class LWMain extends JavaPlugin {
 
         //Listeners
         ListenerManager lm = new ListenerManager(this);
+
+        //command
+        getServer().getPluginCommand("lw").setExecutor(new CommandManager());
     }
 
     @Override

@@ -12,7 +12,7 @@ public class TestOreItem implements LWItem {
 
     @Override
     public int CustomModelData() {
-        return 11;
+        return 1;
     }
 
     @Override

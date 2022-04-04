@@ -1,7 +1,6 @@
 package com.github.koryu25.lifeworld.item;
 
 import com.github.koryu25.lifeworld.item.items.TestOreItem;
-import jdk.incubator.vector.VectorOperators;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -21,20 +20,21 @@ public class LWItemManager {
 
     public ItemStack create(LWItem lwItem) {
         ItemStack item = new ItemStack(ITEM_FRAME);
-        if(item.hasItemMeta()) {
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(lwItem.name());
-            meta.setCustomModelData(lwItem.CustomModelData());
-            meta.setLore(lwItem.lore());
-        }
+
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(lwItem.name());
+        meta.setCustomModelData(lwItem.CustomModelData());
+        meta.setLore(lwItem.lore());
+        item.setItemMeta(meta);
+
         return item;
     }
 
     public boolean contains(int customModelData) {
         boolean result = false;
 
-        for(LWItem item : items) {
-            if(item.CustomModelData() == customModelData) {
+        for (LWItem item : items) {
+            if (item.CustomModelData() == customModelData) {
                 result = true;
                 break;
             }
