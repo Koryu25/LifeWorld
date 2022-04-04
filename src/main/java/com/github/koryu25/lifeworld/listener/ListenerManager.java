@@ -1,21 +1,29 @@
 package com.github.koryu25.lifeworld.listener;
 
-import com.github.koryu25.lifeworld.listener.listeners.BlockBreakPlaceListener;
-import com.github.koryu25.lifeworld.listener.listeners.JoinQuitListener;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ListenerManager {
 
-    private final JavaPlugin main;
+    private JavaPlugin plugin;
 
-    public ListenerManager(JavaPlugin main) {
-        this.main = main;
-        register(new JoinQuitListener());
-        register(new BlockBreakPlaceListener());
+    private List<Listener> listeners = new ArrayList<>();
+
+    public ListenerManager(JavaPlugin plugin) {
+        this.plugin = plugin;
+
+        listeners.add(new ItemFrameListener());
+        listeners.add(new LWBlockListener());
+
+        register();
     }
 
-    public void register(Listener listener) {
-        main.getServer().getPluginManager().registerEvents(listener, main);
+    private void register() {
+        for(Listener l : listeners) {
+            plugin.getServer().getPluginManager().registerEvents(l, plugin);
+        }
     }
 }

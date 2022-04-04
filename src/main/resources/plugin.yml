@@ -2,6 +2,6 @@ name: LifeWorld
 version: '${version}'
 main: com.github.koryu25.lifeworld.LWMain
 api-version: 1.17
-authors: [ Koryu25 ]
+authors: [ Koryu25 , erudo]
 commands:
   lw:
