@@ -1,8 +1,10 @@
 package com.github.koryu25.lifeworld.listener;
 
+import com.github.koryu25.lifeworld.LWAPI;
 import com.github.koryu25.lifeworld.LWMain;
 import com.github.koryu25.lifeworld.item.LWItem;
 import com.github.koryu25.lifeworld.item.LWItemManager;
+import com.github.koryu25.lifeworld.util.InventoryUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -37,15 +39,16 @@ public class ItemFrameListener implements Listener {
                     int customModelData = meta.getCustomModelData();
                     String CustomName = meta.getDisplayName();
 
-                    boolean contains = LWMain.getInstance().getLwItemManager().contains(customModelData);
+                    boolean contains = LWAPI.getInstance().getLwItemManager().contains(customModelData);
 
                     if (contains) {
                         e.setCancelled(true);
 
-                        LWItem lwItem = LWMain.getInstance().getLwItemManager().getItemFromName(CustomName);
+                        LWItem lwItem = LWAPI.getInstance().getLwItemManager().getItemFromName(CustomName);
                         if(!lwItem.canPlace()) return;
 
-                        inv.remove(item);
+                        InventoryUtil invUtil = new InventoryUtil(inv);
+                        invUtil.decItemAmount(item);
 
                         //スポナーの設置
                         Location blockLoc = loc.clone().add(0, 1, 0);

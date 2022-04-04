@@ -32,5 +32,10 @@ public class TestOreItem implements LWItem {
         return true;
     }
 
+    @Override
+    public int exp() {
+        return 0;
+    }
+
 
 }

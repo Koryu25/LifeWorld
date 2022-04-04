@@ -1,5 +1,6 @@
 package com.github.koryu25.lifeworld.command;
 
+import com.github.koryu25.lifeworld.LWAPI;
 import com.github.koryu25.lifeworld.LWMain;
 import com.github.koryu25.lifeworld.item.LWItemManager;
 import com.github.koryu25.lifeworld.item.items.TestOreItem;
@@ -18,7 +19,7 @@ public class CommandManager implements CommandExecutor {
             Player player = (Player) sender;
             PlayerInventory inv = player.getInventory();
 
-            LWItemManager lim = LWMain.getInstance().getLwItemManager();
+            LWItemManager lim = LWAPI.getInstance().getLwItemManager();
             ItemStack ore = lim.create(new TestOreItem());
 
             inv.addItem(ore);

@@ -13,19 +13,8 @@ import java.util.HashMap;
 
 public final class LWMain extends JavaPlugin {
 
-    private static LWMain instance;
-
-    @Getter
-    public LWItemManager lwItemManager;
-
     @Override
     public void onEnable() {
-        // instance
-        instance = this;
-
-        //LWItems
-        lwItemManager = new LWItemManager();
-
         //Listeners
         ListenerManager lm = new ListenerManager(this);
 
@@ -35,9 +24,5 @@ public final class LWMain extends JavaPlugin {
 
     @Override
     public void onDisable() {
-    }
-
-    public static LWMain getInstance() {
-        return instance;
     }
 }
