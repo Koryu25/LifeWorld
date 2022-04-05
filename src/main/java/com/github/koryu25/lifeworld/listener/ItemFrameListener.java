@@ -1,9 +1,7 @@
 package com.github.koryu25.lifeworld.listener;
 
 import com.github.koryu25.lifeworld.LWAPI;
-import com.github.koryu25.lifeworld.LWMain;
 import com.github.koryu25.lifeworld.item.LWItem;
-import com.github.koryu25.lifeworld.item.LWItemManager;
 import com.github.koryu25.lifeworld.util.InventoryUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,7 +17,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class ItemFrameListener implements Listener {
 

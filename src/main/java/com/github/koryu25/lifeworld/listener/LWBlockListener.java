@@ -1,10 +1,8 @@
 package com.github.koryu25.lifeworld.listener;
 
 import com.github.koryu25.lifeworld.LWAPI;
-import com.github.koryu25.lifeworld.LWMain;
 import com.github.koryu25.lifeworld.item.LWItem;
 import com.github.koryu25.lifeworld.item.LWItemManager;
-import com.github.koryu25.lifeworld.item.items.TestOreItem;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

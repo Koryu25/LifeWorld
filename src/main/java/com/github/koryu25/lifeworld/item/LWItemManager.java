@@ -2,7 +2,6 @@ package com.github.koryu25.lifeworld.item;
 
 import com.github.koryu25.lifeworld.item.items.TestOreItem;
 import org.bukkit.Material;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -58,6 +57,7 @@ public class LWItemManager {
         for(LWItem lwItem : items) {
             if(lwItem.name().equals(name)) {
                 item = lwItem;
+                break;
             }
         }
 

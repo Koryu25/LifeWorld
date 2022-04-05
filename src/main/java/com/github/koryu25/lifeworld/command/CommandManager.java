@@ -1,7 +1,6 @@
 package com.github.koryu25.lifeworld.command;
 
 import com.github.koryu25.lifeworld.LWAPI;
-import com.github.koryu25.lifeworld.LWMain;
 import com.github.koryu25.lifeworld.item.LWItemManager;
 import com.github.koryu25.lifeworld.item.items.TestOreItem;
 import org.bukkit.command.Command;
