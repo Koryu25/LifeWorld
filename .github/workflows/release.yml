@@ -26,7 +26,11 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
-
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: LifeWorld
+          path: build/libs
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
@@ -42,4 +46,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: build/libs/Lifeworld.zip
+          asset_content_type: application/zip
           asset_name: Lifeworld.zip
