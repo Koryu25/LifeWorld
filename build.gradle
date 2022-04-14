@@ -1,9 +1,10 @@
 plugins {
     id 'java'
+    id 'com.palantir.git-version' version '0.12.2'
 }
 
 group = 'com.github.koryu25'
-version = '0.0.1'
+version = gitVersion()
 
 repositories {
     mavenCentral()
