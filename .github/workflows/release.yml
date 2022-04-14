@@ -32,7 +32,7 @@ jobs:
           name: Lifeworld
           path: build/lib
       - name: Create a release
-        uses: actions/create-release-asset@v1.0.1
+        uses: actions/upload-release-asset@v1.0.1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: build/libs/Lifeworld.zip
