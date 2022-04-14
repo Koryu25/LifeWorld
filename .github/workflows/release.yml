@@ -26,12 +26,15 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
         with:
-          name: Lifeworld
-          path: build/lib
-      - name: Create a release
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload a release
         uses: actions/upload-release-asset@v1.0.1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
