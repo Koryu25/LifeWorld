@@ -26,3 +26,8 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Lifeworld-Artifact
+          path: build/libs
