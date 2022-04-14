@@ -22,6 +22,11 @@ jobs:
         run: |
           VERSION=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
           echo ::set-output name=version::$VERSION
+      #ビルド
+      - name: Set Permission of Gradlew
+        run: chmod +x gradlew
+      - name: gradlew build
+        run: ./gradlew build
       #リリースページの作成
       - name: create release
         id: create_release
