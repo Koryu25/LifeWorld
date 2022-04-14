@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.github.koryu25'
-version = '0.0.1'
+version = 'v1.0.4'
 
 repositories {
     mavenCentral()
@@ -23,7 +23,6 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
-    implementation 'io.github.bananapuncher714:nbteditor:7.18.1'
 
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
