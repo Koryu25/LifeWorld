@@ -48,3 +48,12 @@ jobs:
           asset_path: build/libs/LifeWorld-${{ steps.version.outputs.version }}.jar
           asset_name: LifeWorld-${{ steps.version.outputs.version }}.jar
           asset_content_type: application/jar
+      - name: upload release2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: build/libs/LifeWorld-${{ steps.version.outputs.version }}-all.jar
+          asset_name: LifeWorld-${{ steps.version.outputs.version }}-all.jar
+          asset_content_type: application/jar
